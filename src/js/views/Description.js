@@ -20,12 +20,12 @@ export default function Description() {
 
 	return (
 		<div>
-			<div className="container">
+			<div className="container my-5">
 				{description ? (
-					<div className="card">
+					<div className="card bg-black text-light">
 						<div className="card-body">
-							<h5 className="card-title">{description.properties.name}</h5>
-							<h6 className="card-subtitle mb-2 text-muted">{description.description}</h6>
+							<h3 className="card-title text-warning mb-3">{description.properties.name}</h3>
+							<h6 className="card-subtitle mb-5 font-italic text-muted">{description.description}</h6>
 
 							{Object.keys(description.properties).map((property, index) => {
 								return (

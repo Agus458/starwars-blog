@@ -6,19 +6,25 @@ export const NavBar = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<nav className="navbar navbar-light bg-light mb-3">
+		<nav className="navbar navbar-dark sticky-top bg-black">
 			<div className="container">
 				<Link to="/">
-					<div className="navbar-brand">StarWars</div>
+					<div className="navbar-brand">
+						<img
+							id="logo"
+							src="http://www.unioncosmos.com/wp-content/uploads/2016/05/union-cosmos-Star-Wars-png-transparente-300x165.png"
+							alt=""
+						/>
+					</div>
 				</Link>
 				<div className="ml-auto">
 					<div className="btn-group">
-						<button type="button" className="btn btn-primary">
+						<button type="button" className="btn btn-warning">
 							Favourites
 						</button>
 						<button
 							type="button"
-							className="btn btn-primary dropdown-toggle dropdown-toggle-split"
+							className="btn btn-warning dropdown-toggle dropdown-toggle-split"
 							data-toggle="dropdown"
 							aria-haspopup="true"
 							aria-expanded="false">
@@ -30,7 +36,9 @@ export const NavBar = () => {
 									return (
 										<div key={index} className="dropdown-item">
 											<div className="row justify-content-between align-items-center">
-												<div className="col">{favourite.name}</div>
+												<Link to={`/description/${favourite.type}/${favourite.id}`}>
+													<div className="col">{favourite.name}</div>
+												</Link>
 												<div className="col-2 text-danger">
 													<i
 														className="fas fa-trash"

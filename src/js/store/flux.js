@@ -23,15 +23,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 		} catch (error) {}
 	}
 
-	function isAdded(id, type, arr) {
-		for (let i = 0; i < arr.length; i++) {
-			if (arr[i].id === id && arr[i].type === type) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	return {
 		store: {
 			characters: [],
@@ -48,7 +39,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			addFavourite: (id, name, type) => {
 				let favourites = getStore().favourites;
-				if (!isAdded(id, type, favourites)) {
+				if (!getActions().isAdded(id, type, favourites)) {
 					let newFavourite = { id, name, type };
 					let newFavourites = [...favourites, newFavourite];
 					setStore({ favourites: newFavourites });
@@ -61,6 +52,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return favourite.id != id || favourite.type != type;
 				});
 				setStore({ favourites: newFavourites });
+			},
+
+			isAdded: (id, type, arr) => {
+				for (let i = 0; i < arr.length; i++) {
+					if (arr[i].id === id && arr[i].type === type) {
+						return true;
+					}
+				}
+				return false;
 			}
 		}
 	};

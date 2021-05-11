@@ -8,7 +8,7 @@ export default function Card(props) {
 
 	return (
 		<div className="col-4 mb-3">
-			<div className="card">
+			<div className="card bg-black text-light">
 				<div className="card-body">
 					<h5 className="card-title">{props.title}</h5>
 					<p>
@@ -18,7 +18,7 @@ export default function Card(props) {
 					<div className="row">
 						<div className="col">
 							<Link to={`/description/${props.type}/${props.uid}`}>
-								<button type="button" className="btn btn-primary">
+								<button type="button" className="btn btn-outline-warning">
 									Go to description
 								</button>
 							</Link>
@@ -29,7 +29,7 @@ export default function Card(props) {
 								onClick={() => {
 									actions.addFavourite(props.uid, props.title, props.type);
 								}}>
-								<i className="far fa-heart" />
+								<i className={`${props.favourite ? "fas" : "far"} fa-heart`} />
 							</button>
 						</div>
 					</div>
@@ -42,5 +42,6 @@ export default function Card(props) {
 Card.propTypes = {
 	title: PropTypes.string,
 	type: PropTypes.string,
+	favourite: PropTypes.bool,
 	uid: PropTypes.string
 };

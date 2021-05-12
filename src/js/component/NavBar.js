@@ -20,7 +20,7 @@ export const NavBar = () => {
 				<div className="ml-auto">
 					<div className="btn-group">
 						<button type="button" className="btn btn-warning">
-							Favourites
+							Favourites <span className="badge badge-dark">{store.favourites.length}</span>
 						</button>
 						<button
 							type="button"

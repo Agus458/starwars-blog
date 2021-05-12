@@ -1,5 +1,5 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	async function getCharactes() {
+	async function getCharacters() {
 		try {
 			let res = await fetch("https://www.swapi.tech/api/people");
 			let data = await res.json();
@@ -32,7 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			loadSomeData: () => {
-				getCharactes();
+				getCharacters();
 				getPlanets();
 				getStarships();
 			},

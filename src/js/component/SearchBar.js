@@ -14,7 +14,19 @@ export default function SearchBar() {
 
 			store.characters.forEach(elem => {
 				if (elem.name.toLowerCase().startsWith(search.toLowerCase())) {
-					result.push({ id: elem.uid, name, type: "peoples" });
+					result.push({ id: elem.uid, name: elem.name, type: "peoples" });
+				}
+			});
+
+			store.planets.forEach(elem => {
+				if (elem.name.toLowerCase().startsWith(search.toLowerCase())) {
+					result.push({ id: elem.uid, name: elem.name, type: "planets" });
+				}
+			});
+
+			store.starships.forEach(elem => {
+				if (elem.name.toLowerCase().startsWith(search.toLowerCase())) {
+					result.push({ id: elem.uid, name: elem.name, type: "starships" });
 				}
 			});
 

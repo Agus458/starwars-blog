@@ -36,6 +36,17 @@ body {
 	overflow-x: auto;
 }
 
+.list-group-item, .form-control, .input-group-text {
+    background-color: rgb(37, 37, 37);
+    border-color: rgb(56, 56, 56);
+    color: white;
+}
+
+.list-group-item:hover {
+    background-color: rgb(44, 44, 44);
+    color: white;
+}
+
 #logo {
     width: 120px;
 }

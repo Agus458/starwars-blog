@@ -43,6 +43,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let newFavourite = { id, name, type };
 					let newFavourites = [...favourites, newFavourite];
 					setStore({ favourites: newFavourites });
+				} else {
+					getActions().removeFavourite(id, type);
 				}
 			},
 

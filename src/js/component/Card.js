@@ -7,7 +7,7 @@ export default function Card(props) {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="col-4 mb-3">
+		<div className="col-12 col-md-6 col-xl-4 mb-3">
 			<div className="card bg-black text-light">
 				<div className="card-body">
 					<h5 className="card-title">{props.title}</h5>

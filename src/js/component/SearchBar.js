@@ -1,5 +1,6 @@
 import React, { useRef, useContext, useState } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 export default function SearchBar() {
 	const { store, actions } = useContext(Context);
@@ -14,7 +15,7 @@ export default function SearchBar() {
 
 			store.characters.forEach(elem => {
 				if (elem.name.toLowerCase().startsWith(search.toLowerCase())) {
-					result.push({ id: elem.uid, name: elem.name, type: "peoples" });
+					result.push({ id: elem.uid, name: elem.name, type: "people" });
 				}
 			});
 
@@ -37,18 +38,32 @@ export default function SearchBar() {
 	};
 
 	return (
-		<div className="container d-flex justify-content-center">
+		<div className="container d-flex justify-content-center mt-3">
 			<div className="col-12 col-md-6">
-				<input className="form-control" type="text" placeholder="Type to search.." onKeyUp={autoComplete} />
-				<ul className="list-group autocom-box">
-					{list.map((elem, index) => {
-						return (
-							<li key={index} className="list-group-item list-group-item-action">
-								{elem.name}
-							</li>
-						);
-					})}
-				</ul>
+				<div className="input-group">
+					<div className="input-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text">
+								<i className="fas fa-search" />
+							</span>
+						</div>
+						<input
+							className="form-control"
+							type="text"
+							placeholder="Type to search.."
+							onKeyUp={autoComplete}
+						/>
+					</div>
+					<ul className="list-group autocom-box">
+						{list.map((elem, index) => {
+							return (
+								<Link key={index} to={`/description/${elem.type}/${elem.id}`}>
+									<li className="list-group-item list-group-item-action">{elem.name}</li>
+								</Link>
+							);
+						})}
+					</ul>
+				</div>
 			</div>
 		</div>
 	);

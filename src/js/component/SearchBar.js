@@ -15,19 +15,19 @@ export default function SearchBar() {
 
 			store.characters.forEach(elem => {
 				if (elem.name.toLowerCase().startsWith(search.toLowerCase())) {
-					result.push({ id: elem.uid, name: elem.name, type: "people" });
+					result.push({ uid: elem.uid, name: elem.name, type: "people" });
 				}
 			});
 
 			store.planets.forEach(elem => {
 				if (elem.name.toLowerCase().startsWith(search.toLowerCase())) {
-					result.push({ id: elem.uid, name: elem.name, type: "planets" });
+					result.push({ uid: elem.uid, name: elem.name, type: "planets" });
 				}
 			});
 
 			store.starships.forEach(elem => {
 				if (elem.name.toLowerCase().startsWith(search.toLowerCase())) {
-					result.push({ id: elem.uid, name: elem.name, type: "starships" });
+					result.push({ uid: elem.uid, name: elem.name, type: "starships" });
 				}
 			});
 
@@ -57,7 +57,7 @@ export default function SearchBar() {
 					<ul className="list-group autocom-box">
 						{list.map((elem, index) => {
 							return (
-								<Link key={index} to={`/description/${elem.type}/${elem.id}`}>
+								<Link key={index} to={`/description/${elem.type}/${elem.uid}`}>
 									<li className="list-group-item list-group-item-action">{elem.name}</li>
 								</Link>
 							);

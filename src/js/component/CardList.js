@@ -13,11 +13,9 @@ export default function CardList(props) {
 				{props.array.map(element => {
 					return (
 						<Card
-							title={element.name}
-							uid={element.uid}
+							obj={element}
 							key={element.uid}
-							type={props.type}
-							favourite={actions.isAdded(element.uid, props.type, store.favourites)}
+							favourite={actions.isAdded(element.uid, element.type, store.favourites) != null}
 						/>
 					);
 				})}
@@ -28,6 +26,5 @@ export default function CardList(props) {
 
 CardList.propTypes = {
 	title: PropTypes.string,
-	type: PropTypes.string,
 	array: PropTypes.array
 };

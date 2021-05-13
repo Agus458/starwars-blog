@@ -1,26 +1,50 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	async function getCharacters() {
-		try {
-			let res = await fetch("https://www.swapi.tech/api/people");
-			let data = await res.json();
-			setStore({ characters: data.results });
-		} catch (error) {}
+		fetch("https://www.swapi.tech/api/people")
+			.then(res => res.json())
+			.then(data => {
+				let list = data.results;
+				list.forEach(elem => {
+					elem.type = "people";
+					fetch(elem.url)
+						.then(res => res.json())
+						.then(data => (elem.properties = data.result.properties));
+				});
+				setStore({ characters: list });
+			})
+			.catch(err => console.error(err));
 	}
 
 	async function getPlanets() {
-		try {
-			let res = await fetch("https://www.swapi.tech/api/planets");
-			let data = await res.json();
-			setStore({ planets: data.results });
-		} catch (error) {}
+		fetch("https://www.swapi.tech/api/planets")
+			.then(res => res.json())
+			.then(data => {
+				let list = data.results;
+				list.forEach(elem => {
+					elem.type = "planets";
+					fetch(elem.url)
+						.then(res => res.json())
+						.then(data => (elem.properties = data.result.properties));
+				});
+				setStore({ planets: list });
+			})
+			.catch(err => console.error(err));
 	}
 
 	async function getStarships() {
-		try {
-			let res = await fetch("https://www.swapi.tech/api/starships");
-			let data = await res.json();
-			setStore({ starships: data.results });
-		} catch (error) {}
+		fetch("https://www.swapi.tech/api/starships")
+			.then(res => res.json())
+			.then(data => {
+				let list = data.results;
+				list.forEach(elem => {
+					elem.type = "starships";
+					fetch(elem.url)
+						.then(res => res.json())
+						.then(data => (elem.properties = data.result.properties));
+				});
+				setStore({ starships: list });
+			})
+			.catch(err => console.error(err));
 	}
 
 	return {
@@ -37,32 +61,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getStarships();
 			},
 
-			addFavourite: (id, name, type) => {
+			addFavourite: (uid, name, type) => {
 				let favourites = getStore().favourites;
-				if (!getActions().isAdded(id, type, favourites)) {
-					let newFavourite = { id, name, type };
+				if (getActions().isAdded(uid, type, favourites) == null) {
+					let newFavourite = getActions().getData(uid, type);
 					let newFavourites = [...favourites, newFavourite];
 					setStore({ favourites: newFavourites });
 				} else {
-					getActions().removeFavourite(id, type);
+					getActions().removeFavourite(uid, type);
 				}
 			},
 
-			removeFavourite: (id, type) => {
+			removeFavourite: (uid, type) => {
 				let favourites = getStore().favourites;
 				let newFavourites = favourites.filter(favourite => {
-					return favourite.id != id || favourite.type != type;
+					return favourite.uid != uid || favourite.type != type;
 				});
 				setStore({ favourites: newFavourites });
 			},
 
-			isAdded: (id, type, arr) => {
+			isAdded: (uid, type, arr) => {
 				for (let i = 0; i < arr.length; i++) {
-					if (arr[i].id === id && arr[i].type === type) {
-						return true;
+					if (arr[i].uid === uid && arr[i].type === type) {
+						return arr[i];
 					}
 				}
-				return false;
+				return null;
+			},
+
+			getData: (uid, type) => {
+				switch (type) {
+					case "people":
+						return getActions().isAdded(uid, type, getStore().characters);
+					case "planets":
+						return getActions().isAdded(uid, type, getStore().planets);
+					case "starships":
+						return getActions().isAdded(uid, type, getStore().starships);
+				}
 			}
 		}
 	};

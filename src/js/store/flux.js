@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			let res = await fetch("https://www.swapi.tech/api/people");
 			let data = await res.json();
 			setStore({ characters: data.results });
+			localStorage.setItem("characters", JSON.stringify(data.results));
 		} catch (error) {}
 	}
 
@@ -12,6 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			let res = await fetch("https://www.swapi.tech/api/planets");
 			let data = await res.json();
 			setStore({ planets: data.results });
+			localStorage.setItem("planets", JSON.stringify(data.results));
 		} catch (error) {}
 	}
 
@@ -20,6 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			let res = await fetch("https://www.swapi.tech/api/starships");
 			let data = await res.json();
 			setStore({ starships: data.results });
+			localStorage.setItem("starships", JSON.stringify(data.results));
 		} catch (error) {}
 	}
 
@@ -32,9 +35,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			loadSomeData: () => {
-				getCharacters();
-				getPlanets();
-				getStarships();
+				if (
+					!localStorage.getItem("characters") &&
+					!localStorage.getItem("planets") &&
+					!localStorage.getItem("starships")
+				) {
+					getCharacters();
+					getPlanets();
+					getStarships();
+				} else {
+					setStore({
+						characters: JSON.parse(localStorage.getItem("characters")),
+						planets: JSON.parse(localStorage.getItem("planets")),
+						starships: JSON.parse(localStorage.getItem("starships"))
+					});
+				}
 			},
 
 			addFavourite: (id, name, type) => {

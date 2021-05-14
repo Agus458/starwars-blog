@@ -14,9 +14,17 @@ export default function Description() {
 		} catch (error) {}
 	}
 
-	useEffect(() => {
-		getDescription();
-	}, []);
+	useEffect(
+		() => {
+			if (description) {
+				setDescription();
+				getDescription();
+			} else {
+				getDescription();
+			}
+		},
+		[params]
+	);
 
 	return (
 		<div>
@@ -38,7 +46,9 @@ export default function Description() {
 						</div>
 					</div>
 				) : (
-					""
+					<div className="alert alert-info" role="alert">
+						Cargando ...
+					</div>
 				)}
 			</div>
 		</div>

@@ -36,14 +36,14 @@ export const NavBar = () => {
 									return (
 										<div key={index} className="dropdown-item">
 											<div className="row justify-content-between align-items-center">
-												<Link to={`/description/${favourite.type}/${favourite.uid}`}>
+												<Link to={`/description/${favourite.type}/${favourite.id}`}>
 													<div className="col">{favourite.name}</div>
 												</Link>
 												<div className="col-2 text-danger">
 													<i
 														className="fas fa-trash"
 														onClick={() => {
-															actions.removeFavourite(favourite.uid, favourite.type);
+															actions.removeFavourite(favourite.id, favourite.type);
 														}}
 													/>
 												</div>

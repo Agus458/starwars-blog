@@ -10,9 +10,9 @@ export const Home = () => {
 	return (
 		<div className="container mb-5">
 			<SearchBar />
-			<CardList title="Characters" array={store.characters} />
-			<CardList title="Planets" array={store.planets} />
-			<CardList title="Starships" array={store.starships} />
+			<CardList title="Characters" array={store.characters} type="people" />
+			<CardList title="Planets" array={store.planets} type="planets" />
+			<CardList title="Starships" array={store.starships} type="starships" />
 		</div>
 	);
 };

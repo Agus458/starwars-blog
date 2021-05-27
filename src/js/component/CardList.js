@@ -13,9 +13,8 @@ export default function CardList(props) {
 				{props.array.map(element => {
 					return (
 						<Card
-							title={element.name}
-							uid={element.uid}
-							key={element.uid}
+							element={element}
+							key={element.id}
 							type={props.type}
 							favourite={actions.isAdded(element.uid, props.type, store.favourites)}
 						/>

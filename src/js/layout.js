@@ -7,6 +7,7 @@ import Description from "./views/Description.js";
 import injectContext from "./store/appContext";
 
 import { NavBar } from "./component/NavBar";
+import Login from "./views/Login";
 
 //create your first component
 const Layout = () => {
@@ -22,6 +23,9 @@ const Layout = () => {
 					<Switch>
 						<Route exact path="/">
 							<Home />
+						</Route>
+						<Route exact path="/login">
+							<Login />
 						</Route>
 						<Route exact path="/description/:type/:id">
 							<Description />

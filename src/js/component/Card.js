@@ -9,15 +9,16 @@ export default function Card(props) {
 	return (
 		<div className="col-12 col-md-6 col-xl-4 mb-3">
 			<div className="card bg-black text-light">
+				<img src={props.element.img} className="card-img-top" alt="..." />
 				<div className="card-body">
-					<h5 className="card-title">{props.title}</h5>
-					<p>
-						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis officia beatae, deserunt
-						aspernatur tenetur quidem.
-					</p>
+					<h5 className="card-title">{props.element.name}</h5>
+
+					<p className="text-truncate">{props.element.description}</p>
+				</div>
+				<div className="card-footer">
 					<div className="row">
 						<div className="col">
-							<Link to={`/description/${props.type}/${props.uid}`}>
+							<Link to={`/description/${props.type}/${props.element.id}`}>
 								<button type="button" className="btn btn-outline-warning">
 									Go to description
 								</button>
@@ -27,7 +28,7 @@ export default function Card(props) {
 							<button
 								className="btn btn-danger"
 								onClick={() => {
-									actions.addFavourite(props.uid, props.title, props.type);
+									actions.addFavourite(props.element.id, props.element.name, props.type);
 								}}>
 								<i className={`${props.favourite ? "fas" : "far"} fa-heart`} />
 							</button>
@@ -40,8 +41,7 @@ export default function Card(props) {
 }
 
 Card.propTypes = {
-	title: PropTypes.string,
+	element: PropTypes.object,
 	type: PropTypes.string,
-	favourite: PropTypes.bool,
-	uid: PropTypes.string
+	favourite: PropTypes.bool
 };

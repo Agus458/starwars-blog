@@ -18,44 +18,50 @@ export const NavBar = () => {
 					</div>
 				</Link>
 				<div className="ml-auto">
-					<div className="btn-group">
-						<button type="button" className="btn btn-warning">
-							Favourites <span className="badge badge-dark">{store.favourites.length}</span>
-						</button>
-						<button
-							type="button"
-							className="btn btn-warning dropdown-toggle dropdown-toggle-split"
-							data-toggle="dropdown"
-							aria-haspopup="true"
-							aria-expanded="false">
-							<span className="sr-only">Toggle Dropdown</span>
-						</button>
-						<div className="dropdown-menu dropdown-menu-right">
-							{store.favourites.length > 0 ? (
-								store.favourites.map((favourite, index) => {
-									return (
-										<div key={index} className="dropdown-item">
-											<div className="row justify-content-between align-items-center">
-												<Link to={`/description/${favourite.type}/${favourite.id}`}>
-													<div className="col">{favourite.name}</div>
-												</Link>
-												<div className="col-2 text-danger">
-													<i
-														className="fas fa-trash"
-														onClick={() => {
-															actions.removeFavourite(favourite.id, favourite.type);
-														}}
-													/>
+					{sessionStorage.getItem("user") ? (
+						<div className="btn-group">
+							<button type="button" className="btn btn-warning">
+								Favourites <span className="badge badge-dark">{store.favourites.length}</span>
+							</button>
+							<button
+								type="button"
+								className="btn btn-warning dropdown-toggle dropdown-toggle-split"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">
+								<span className="sr-only">Toggle Dropdown</span>
+							</button>
+							<div className="dropdown-menu dropdown-menu-right">
+								{store.favourites.length > 0 ? (
+									store.favourites.map((favourite, index) => {
+										return (
+											<div key={index} className="dropdown-item">
+												<div className="row justify-content-between align-items-center">
+													<Link to={`/description/${favourite.type}/${favourite.id}`}>
+														<div className="col">{favourite.name}</div>
+													</Link>
+													<div className="col-2 text-danger">
+														<i
+															className="fas fa-trash"
+															onClick={() => {
+																actions.removeFavourite(favourite.id, favourite.type);
+															}}
+														/>
+													</div>
 												</div>
 											</div>
-										</div>
-									);
-								})
-							) : (
-								<div className="dropdown-item">No favourites...</div>
-							)}
+										);
+									})
+								) : (
+									<div className="dropdown-item">No favourites...</div>
+								)}
+							</div>
 						</div>
-					</div>
+					) : (
+						<Link to="/login">
+							<div className="btn btn-warning">Login</div>
+						</Link>
+					)}
 				</div>
 			</div>
 		</nav>

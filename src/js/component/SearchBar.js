@@ -25,12 +25,6 @@ export default function SearchBar() {
 				}
 			});
 
-			store.starships.forEach(elem => {
-				if (elem.name.toLowerCase().startsWith(search.toLowerCase())) {
-					result.push({ id: elem.uid, name: elem.name, type: "starships" });
-				}
-			});
-
 			setList(result);
 		} else {
 			setList([]);
@@ -38,7 +32,7 @@ export default function SearchBar() {
 	};
 
 	return (
-		<div className="container d-flex justify-content-center mt-3">
+		<div id="searchbar" className="container d-flex justify-content-center mt-3">
 			<div className="col-12 col-md-6">
 				<div className="input-group">
 					<div className="input-group">
